@@ -6,25 +6,25 @@
 </div>
 <div class="container">
   <!-- html5 novalidate: pour éviter que le navigateur gère la validation -->
-  <form class="form" novalidate #form="ngForm">
+  <form class="form" novalidate (ngSubmit)="addItem()" [formGroup]="form">
     <div class="form-group">
-      <input #name="ngModel" type="text" [(ngModel)]="newItem.name" name="name" class="form-control" placeholder="Prénom" required minlength="2">
+      <input formControlName="name" type="text" name="name" class="form-control" placeholder="Prénom">
       <!-- pristine : tant que le champ n'a pas été modifié mais pas besoin ici -->
-      <div [hidden]="name.valid || !newItem.name" class="alert alert-danger">Champ invalide</div>
+      <div *ngIf="isChampValid('name')" class="alert alert-danger">Champ invalide</div>
     </div>
     <div class="form-group">
-      <input #reference="ngModel" type="text" [(ngModel)]="newItem.reference" name="preference" class="form-control" placeholder="ex: 1234" required minlength="4">
-      <div [hidden]="reference.valid || !newItem.reference" class="alert alert-danger">Champ invalide</div>
+      <input formControlName="ref" type="text" name="ref" class="form-control" placeholder="ex: 1234">
+      <div *ngIf="isChampValid('ref')" class="alert alert-danger">Champ invalide</div>
     </div>
     <div class="form-group">
-      <select class="form-control" [(ngModel)]="newItem.state" name="state">
+      <select formControlName="state" class="form-control" name="state">
         <option [ngValue]="0">A livrer</option>
         <option [ngValue]="1">En cours de livraison</option>
         <option [ngValue]="2">Commande livréer</option>
       </select>
     </div>
     <!-- pour désactiver le bouton si la form n'est pas valide -->
-    <button [disabled]="form.invalid" type="submit" (click)="addItem()" class="btn btn-primary">Envoyer</button>
+    <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Envoyer</button>
   </form>
 </div>
 <app-list-item></app-list-item>
