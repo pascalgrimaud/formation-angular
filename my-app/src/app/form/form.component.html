@@ -1,0 +1,23 @@
+<div class="container">
+  <!-- html5 novalidate: pour éviter que le navigateur gère la validation -->
+  <form class="form" novalidate (ngSubmit)="addItem()" [formGroup]="form">
+    <div class="form-group">
+      <input formControlName="name" type="text" name="name" class="form-control" placeholder="Prénom">
+      <!-- pristine : tant que le champ n'a pas été modifié mais pas besoin ici -->
+      <div *ngIf="isChampValid('name')" class="alert alert-danger">Champ invalide</div>
+    </div>
+    <div class="form-group">
+      <input formControlName="ref" type="text" name="ref" class="form-control" placeholder="ex: 1234">
+      <div *ngIf="isChampValid('ref')" class="alert alert-danger">Champ invalide</div>
+    </div>
+    <div class="form-group">
+      <select formControlName="state" class="form-control" name="state">
+        <option [ngValue]="0">A livrer</option>
+        <option [ngValue]="1">En cours de livraison</option>
+        <option [ngValue]="2">Commande livréer</option>
+      </select>
+    </div>
+    <!-- pour désactiver le bouton si la form n'est pas valide -->
+    <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Envoyer</button>
+  </form>
+</div>
