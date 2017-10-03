@@ -4,15 +4,17 @@
   <h1>Welcome</h1>
   <img width="100" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
 </div>
-<app-list-item></app-list-item>
 <div class="container">
   <!-- html5 novalidate: pour éviter que le navigateur gère la validation -->
-  <form class="form" novalidate>
+  <form class="form" novalidate #form="ngForm">
     <div class="form-group">
-      <input type="text" [(ngModel)]="newItem.name" name="name" class="form-control" placeholder="Prénom">
+      <input #name="ngModel" type="text" [(ngModel)]="newItem.name" name="name" class="form-control" placeholder="Prénom" required minlength="2">
+      <!-- pristine : tant que le champ n'a pas été modifié mais pas besoin ici -->
+      <div [hidden]="name.valid || !newItem.name" class="alert alert-danger">Champ invalide</div>
     </div>
     <div class="form-group">
-      <input type="text" [(ngModel)]="newItem.reference" name="preference" class="form-control" placeholder="ex: 1234">
+      <input #reference="ngModel" type="text" [(ngModel)]="newItem.reference" name="preference" class="form-control" placeholder="ex: 1234" required minlength="4">
+      <div [hidden]="reference.valid || !newItem.reference" class="alert alert-danger">Champ invalide</div>
     </div>
     <div class="form-group">
       <select class="form-control" [(ngModel)]="newItem.state" name="state">
@@ -21,6 +23,9 @@
         <option [ngValue]="2">Commande livréer</option>
       </select>
     </div>
-    <button type="submit" (click)="addItem()" class="btn btn-primary">Envoyer</button>
+    <!-- pour désactiver le bouton si la form n'est pas valide -->
+    <button [disabled]="form.invalid" type="submit" (click)="addItem()" class="btn btn-primary">Envoyer</button>
   </form>
 </div>
+<app-list-item></app-list-item>
+
