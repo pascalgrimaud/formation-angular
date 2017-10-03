@@ -8,13 +8,15 @@ import { ListItemComponent } from './list-item/list-item.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from './modal/modal.component';
+import { FormComponent } from './form/form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
     ListItemComponent,
-    ModalComponent
+    ModalComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,
