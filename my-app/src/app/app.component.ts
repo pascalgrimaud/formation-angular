@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from "./item";
 import { FormBuilder, FormGroup, FormControl, Validators } from "@angular/forms";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { ModalComponent } from "./modal/modal.component";
 
 @Component({
   selector: 'app-root',
@@ -15,7 +17,7 @@ export class AppComponent implements OnInit {
   refCtrl: FormControl;
   stateCtrl: FormControl;
 
-  constructor(fb: FormBuilder) {
+  constructor(fb: FormBuilder, private modalService: NgbModal) {
     // pour mettre plusieurs validateurs, mettre un tableau
     this.nameCtrl = fb.control('', [
       Validators.required,
@@ -47,13 +49,13 @@ export class AppComponent implements OnInit {
   }
 
   addItem() {
-    console.log(this.form.value);
     this.collection.push({
       name: this.form.get('name').value,
       reference: this.form.get('ref').value,
       state: this.form.get('state').value
     });
     this.reset();
+    this.open();
   }
 
   reset() {
@@ -63,5 +65,10 @@ export class AppComponent implements OnInit {
 
   isChampValid(champs: string) {
     return this.form.get(champs).dirty && this.form.get(champs).hasError('minlength');
+  }
+
+  open() {
+    const modalRef = this.modalService.open(ModalComponent);
+    modalRef.componentInstance.msg = 'Votre commande a bien été ajoutée!';
   }
 }
