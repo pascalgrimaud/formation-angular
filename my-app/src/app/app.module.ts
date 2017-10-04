@@ -13,6 +13,8 @@ import { FilterPipe } from './filter.pipe';
 import { StateDirective } from './state.directive';
 import { CollectionService } from "./collection.service";
 import {AppRoutingModule} from "./app-routing/app-routing.module";
+import { HomeComponent } from './home/home.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import {AppRoutingModule} from "./app-routing/app-routing.module";
     ModalComponent,
     FormComponent,
     FilterPipe,
-    StateDirective
+    StateDirective,
+    HomeComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
