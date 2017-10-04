@@ -19,5 +19,7 @@ script:
 - ng serve --sourcemap=false &
 - sleep 10
 - curl -v http://localhost:4200/
+after_script:
+- sed -i -e 's/FIREBASE_APIKEY/'"$FIREBASE_APIKEY"'/g' src/environment/environment.prod.ts
 - ng build --prod --aot
 - firebase deploy --token "$FIREBASE_TOKEN"

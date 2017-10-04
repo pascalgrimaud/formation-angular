@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {ModalComponent} from "../modal/modal.component";
+import {ModalComponent} from "../../modal/modal.component";
 import {CollectionService} from "../collection.service";
 
 @Component({
