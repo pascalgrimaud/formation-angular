@@ -12,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 import { ItemModule} from "./item/item.module";
+import {ItemsRoutingModule} from "./item/items-routing.module";
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ItemModule} from "./item/item.module";
     BrowserModule,
     NgbModule.forRoot(),
     ItemModule,
+    ItemsRoutingModule,
     AppRoutingModule,
 
   ],

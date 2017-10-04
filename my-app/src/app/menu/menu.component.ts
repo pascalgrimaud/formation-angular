@@ -12,7 +12,7 @@ export class MenuComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.title = 'JHipster';
+    this.title = 'JHipster v0.0.1';
   }
 
 }
