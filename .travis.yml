@@ -11,7 +11,7 @@ before_install:
 - sh -e /etc/init.d/xvfb start
 - curl -o- -L https://yarnpkg.com/install.sh | bash
 - export PATH=$HOME/.yarn/bin:$PATH
-- yarn global add @angular/cli
+- yarn global add @angular/cli firebase-tools
 install:
 - cd my-app/
 - yarn install
@@ -19,10 +19,5 @@ script:
 - ng serve --sourcemap=false &
 - sleep 10
 - curl -v http://localhost:4200/
-before_deploy:
 - ng build --prod --aot
-deploy:
-  provider: firebase
-  token:
-    secure: $FIREBASE_TOKEN
-  project: formation-angular
+- firebase deploy --token "$FIREBASE_TOKEN"
