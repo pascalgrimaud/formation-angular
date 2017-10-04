@@ -1,8 +1,8 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { ModalComponent } from "../modal/modal.component";
-import { Item } from "../item";
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {ModalComponent} from "../modal/modal.component";
+import {CollectionService} from "../collection.service";
 
 @Component({
   selector: 'app-form',
@@ -11,14 +11,12 @@ import { Item } from "../item";
 })
 export class FormComponent implements OnInit {
 
-  @Output() add: EventEmitter<Item> = new EventEmitter();
-
   form: FormGroup;
   nameCtrl: FormControl;
   refCtrl: FormControl;
   stateCtrl: FormControl;
 
-  constructor(fb: FormBuilder, private modalService: NgbModal) {
+  constructor(fb: FormBuilder, private modalService: NgbModal, private _CollectionService: CollectionService) {
     // pour mettre plusieurs validateurs, mettre un tableau
     this.nameCtrl = fb.control('', [
       Validators.required,
@@ -27,7 +25,7 @@ export class FormComponent implements OnInit {
     this.refCtrl = fb.control('', [
       Validators.required,
       Validators.minLength(4)
-    ])
+    ]);
     this.stateCtrl = fb.control(0);
 
     // name, reference: correspondent aux noms dans le
@@ -59,11 +57,20 @@ export class FormComponent implements OnInit {
   }
 
   addItem() {
+    /*
     this.add.emit({
       name: this.form.get('name').value,
       reference: this.form.get('ref').value,
       state: this.form.get('state').value
     });
+    */
+    this._CollectionService.addItem(
+      {
+        name: this.form.get('name').value,
+        reference: this.form.get('ref').value,
+        state: this.form.get('state').value
+      }
+    );
     this.reset();
     this.open();
   }
