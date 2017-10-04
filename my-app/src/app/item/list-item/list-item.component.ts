@@ -9,12 +9,14 @@ import {CollectionService} from "../collection.service";
   styleUrls: ['./list-item.component.scss']
 })
 export class ListItemComponent implements OnInit {
-  collection: Item[];
+  collection: any[] = [];
 
-  constructor(private _CollectionService: CollectionService) { }
+  constructor(private collectionService: CollectionService) { }
 
   ngOnInit() {
-    this.collection = this._CollectionService.collection;
+    this.collectionService.getItem().valueChanges().subscribe((data) =>
+      this.collection = data
+    );
   }
 
   changeState(item: Item, state: number) {
